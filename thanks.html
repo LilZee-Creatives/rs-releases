@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Thank you — RESUME</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0e0f11">
+  <link rel="icon" href="assets/icon.png">
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="./"><img src="assets/icon.png" alt="" width="28" height="28">RESUME</a>
+    <a class="btn btn-ink btn-sm" href="./#download">Download</a>
+  </div>
+</header>
+<main class="wrap narrow thanks">
+  <div class="eyebrow">Payment received</div>
+  <h1>Thank you. You’re all set.</h1>
+  <div id="hasKey" hidden>
+    <p class="sec-lede">Here’s your license key. We’ve also emailed it to you.</p>
+    <div class="keybox">
+      <code id="keyText"></code>
+      <button class="btn btn-ink btn-sm" id="copyKey" type="button">Copy key</button>
+    </div>
+  </div>
+  <p class="sec-lede" id="noKey">Your license key is on its way to your email. It usually arrives within a minute; check spam if you don’t see it.</p>
+  <ol class="steps">
+    <li><span><b>Open RESUME.</b> Don’t have it yet? <a href="./#download">Download it here</a>.</span></li>
+    <li><span><b>Go to Settings → Plan &amp; license.</b></span></li>
+    <li><span><b>Paste your key</b> and click Activate. That’s it.</span></li>
+  </ol>
+  <p class="small-print">Your key works on 2 computers. Moving to a new one? In RESUME, use Settings → Plan &amp; license → Release this computer first. Subscriptions can be changed or cancelled from the link in your Dodo Payments receipt. Need help? <a href="./#contact">Contact us</a>.</p>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <span>© <span id="year">2026</span> RESUME · Made by Mustaq</span>
+    <span class="foot-links"><a href="./">Home</a><a href="releases.html">Release log</a><a href="./#contact">Contact</a></span>
+  </div>
+</footer>
+<script src="config.js"></script>
+<script src="site.js"></script>
+<script>
+(() => {
+  const q = new URLSearchParams(location.search);
+  const keys = (q.get("license_key") || "").split(",").map((k) => k.trim()).filter(Boolean);
+  if (keys.length) {
+    document.getElementById("keyText").textContent = keys.join("\n");
+    document.getElementById("hasKey").hidden = false;
+    document.getElementById("noKey").hidden = true;
+    document.getElementById("copyKey").addEventListener("click", (e) => {
+      const b = e.currentTarget;
+      navigator.clipboard.writeText(keys.join("\n")).then(() => {
+        b.textContent = "Copied";
+        setTimeout(() => (b.textContent = "Copy key"), 1600);
+      });
+    });
+  }
+  if (keys.length || q.get("status") === "succeeded" || q.get("status") === "active") window.ResumeSite && window.ResumeSite.track("purchase");
+  // Keep the key out of the address bar after it's shown.
+  if (keys.length) history.replaceState(null, "", location.pathname);
+})();
+</script>
+</body>
+</html>

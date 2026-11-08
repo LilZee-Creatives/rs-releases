@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>RESUME — pick up exactly where you left off</title>
+  <meta name="description" content="RESUME remembers your work sessions — the apps, files and pages you used — so you can return to unfinished work in seconds. Private and local: nothing leaves your computer. Mac and Windows.">
+  <meta property="og:title" content="RESUME — pick up exactly where you left off">
+  <meta property="og:description" content="Start working. RESUME remembers. Return later and continue. For Mac and Windows.">
+  <meta property="og:image" content="assets/og.png">
+  <meta name="theme-color" content="#0e0f11">
+  <link rel="icon" href="assets/icon.png">
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="./"><img src="assets/icon.png" alt="" width="28" height="28">RESUME</a>
+    <nav class="nav" aria-label="Site">
+      <a href="#how">How it works</a>
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="releases.html">Release log</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="btn btn-ink btn-sm" href="#download">Download</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap hero-copy">
+      <p class="eyebrow"><span class="rec"></span> Work-session memory for Mac and Windows</p>
+      <h1>Stop working. Come back.<br><span class="hl">Pick up exactly where you left off.</span></h1>
+      <p class="lede">Start a session and work normally. RESUME quietly keeps track of the apps, files and pages you use. When you come back, your last working context is waiting for you. Everything stays on your computer.</p>
+    </div>
+
+    <div class="wrap dl" id="download">
+      <div class="dl-row">
+        <a class="btn btn-ink btn-lg dl-btn" id="dlMac" href="releases.html" data-os="mac">
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M16.4 12.6c0-2.5 2-3.7 2.1-3.8-1.2-1.7-3-1.9-3.6-2-1.5-.2-3 .9-3.8.9-.8 0-2-.9-3.3-.9-1.7 0-3.3 1-4.2 2.5-1.8 3.1-.5 7.7 1.3 10.2.9 1.2 1.9 2.6 3.2 2.6 1.3-.1 1.8-.8 3.3-.8 1.6 0 2 .8 3.3.8 1.4 0 2.3-1.3 3.1-2.5 1-1.4 1.4-2.8 1.4-2.9 0 0-2.8-1.1-2.8-4.1zM14 5.1c.7-.9 1.2-2 1-3.2-1 0-2.3.7-3 1.6-.7.8-1.2 2-1.1 3.1 1.2.1 2.3-.6 3.1-1.5z"/></svg>
+          <span><b>Download for Mac</b><small id="dlMacSub">Apple Silicon · macOS 11+</small></span>
+        </a>
+        <a class="btn btn-line btn-lg dl-btn" id="dlWin" href="releases.html" data-os="windows">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M2 4.3 10 3.2v7.7H2zM11 3.1 22 1.5v9.4H11zM2 12h8v7.8l-8-1.1zM11 12h11v9.5l-11-1.6z"/></svg>
+          <span><b>Download for Windows</b><small id="dlWinSub">Windows 10 and 11 · 64-bit</small></span>
+        </a>
+      </div>
+      <p class="dl-meta">
+        <span id="dlVersion"><span data-trial>14</span>-day free trial · no account</span>
+        <span class="sep">·</span>
+        <a href="releases.html" id="dlIntel" data-os="mac-intel">Intel Mac?</a>
+        <span class="sep">·</span>
+        <a href="releases.html">All versions</a>
+      </p>
+    </div>
+
+    <!-- The demo: an app window that plays the three moments of a session. -->
+    <div class="wrap stage">
+      <div class="win" id="demo" aria-label="RESUME demo">
+        <div class="win-bar">
+          <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="win-title">RESUME</span>
+          <span class="chip" id="dChip"><span class="dot"></span><span id="dChipText">Ready</span></span>
+        </div>
+        <div class="win-body">
+          <aside class="d-side" aria-hidden="true">
+            <div class="d-nav on">Today</div><div class="d-nav">Projects</div><div class="d-nav">Sessions</div><div class="d-nav">Tasks</div><div class="d-nav">Insights</div>
+          </aside>
+          <div class="d-main">
+            <!-- 1: start -->
+            <div class="scene" data-scene="0">
+              <div class="d-h">What are you working on?</div>
+              <div class="d-input"><span id="dType"></span><span class="caret"></span></div>
+              <div class="d-row"><span class="d-select">AI Research Agent ▾</span><span class="d-btn accent">▶ Start session</span></div>
+            </div>
+            <!-- 2: recording -->
+            <div class="scene" data-scene="1">
+              <div class="d-rec"><span class="dot"></span> RECORDING <span class="d-clock" id="dClock">00:00</span></div>
+              <div class="d-h sm">Fix duplicate retrieval results</div>
+              <ol class="d-feed" id="dFeed"></ol>
+            </div>
+            <!-- 3: resume -->
+            <div class="scene" data-scene="2">
+              <div class="d-k">Continue working</div>
+              <div class="d-h sm">Fix duplicate retrieval results</div>
+              <div class="d-meta">AI Research Agent · yesterday · 2h 05m active</div>
+              <div class="d-ctx">
+                <div><div class="d-k">Last working context</div><b>VS Code</b><div class="d-dim">retrieval.py — research-agent</div></div>
+                <div class="d-shot" aria-hidden="true"><i></i><i></i><i class="s"></i><i></i><i class="s"></i></div>
+              </div>
+              <div class="d-row"><span class="d-btn accent">Continue working →</span><span class="d-btn">Open timeline</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="caption" aria-live="polite">
+        <span class="cap-step" id="capStep">1 / 3</span>
+        <span id="capText">Name what you’re working on and press Start.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="how">
+    <div class="wrap">
+      <h2>Three moments, no work log</h2>
+      <div class="steps3">
+        <article><span class="n">1</span><h3>Start working</h3><p>Type what you’re working on and press Start. RESUME goes to the menu bar or tray with a visible recording light.</p></article>
+        <article><span class="n">2</span><h3>RESUME remembers</h3><p>Every few seconds it notes the app and window in front, and takes a compressed screenshot. Identical screens are skipped.</p></article>
+        <article><span class="n">3</span><h3>Come back and continue</h3><p>Open RESUME and your last session is the first thing you see: what you had open, the timeline, and your pending tasks.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec-alt" id="features">
+    <div class="wrap">
+      <h2>What RESUME does</h2>
+      <p class="sec-lede">Quiet while you work, useful when you return.</p>
+      <div class="feats">
+        <article class="feat">
+          <h3>Continue working</h3>
+          <p>Your last session greets you with where you stopped: the app, the file or page, a screenshot, and one button to start again in the same project.</p>
+          <div class="eg"><span class="tag">VS Code</span><span class="muted">retrieval.py</span><span class="to">→</span><span>Continue</span></div>
+        </article>
+        <article class="feat">
+          <h3>On-device AI summaries</h3>
+          <p>When you stop, a small open-source model on your own computer writes what you did, what you finished, decisions, blockers and the next step — each linked to the screenshots it’s based on. No cloud, no account.</p>
+          <div class="eg"><span class="tag">Seen</span><span class="tag">Likely</span><span class="muted">every claim shows its evidence</span></div>
+        </article>
+        <article class="feat">
+          <h3>A searchable timeline</h3>
+          <p>Every session becomes a timeline of what was on screen, grouped by app and window, with screenshot evidence. Search window titles across all your sessions.</p>
+          <div class="eg"><span class="tag">10:05 Chrome · OAuth docs</span><span class="tag">10:20 VS Code</span></div>
+        </article>
+        <article class="feat">
+          <h3>Productivity insights</h3>
+          <p>Hours per app and per category, time per project, your longest focus block, app switches per hour and when in the day you really work. Re-label any app and history updates.</p>
+          <div class="eg eg-bar"><i style="--w:46%;--c:var(--c1)"></i><i style="--w:22%;--c:var(--c2)"></i><i style="--w:14%;--c:var(--c3)"></i><i style="--w:10%;--c:var(--c4)"></i></div>
+        </article>
+        <article class="feat">
+          <h3>Projects and tasks</h3>
+          <p>Group sessions by project and keep a short list of what’s left. Each project remembers its sessions, tracked time and open tasks.</p>
+          <div class="eg"><span class="tag">AI Research Agent</span><span class="muted">6 sessions · 3 open tasks</span></div>
+        </article>
+        <article class="feat">
+          <h3>Private by design</h3>
+          <p>No cloud, no account, no telemetry. Password managers and private windows are skipped, you can exclude any app or title, and nothing is captured while paused or locked.</p>
+          <div class="eg"><span class="tag">Exclude apps</span><span class="tag">Pause shortcut</span><span class="tag">Delete anything</span></div>
+        </article>
+        <article class="feat">
+          <h3>Light on your computer</h3>
+          <p>Built in Rust for ordinary laptops with 8 GB of memory and no graphics card. Screenshots are compressed, capped by a storage limit you choose, and cleaned up on a schedule.</p>
+          <div class="eg"><span class="tag">WebP screenshots</span><span class="tag">Storage limit</span><span class="tag">Auto cleanup</span></div>
+        </article>
+      </div>
+      <p class="soon"><b>Coming next:</b> search the text inside your screenshots.</p>
+    </div>
+  </section>
+
+  <section class="sec" id="pricing">
+    <div class="wrap">
+      <h2>Pricing</h2>
+      <p class="sec-lede">Try everything free for <span data-trial>14</span> days. Then pick a plan. Every plan has every feature and works on 2 computers.</p>
+      <div class="plans">
+        <div class="plan">
+          <div class="plan-name">Monthly</div>
+          <div class="plan-price"><span data-price="monthly">$8</span> <small>/ month</small></div>
+          <ul><li>All features</li><li>2 computers</li><li>Cancel any time</li></ul>
+          <a class="btn btn-line" data-buy="monthly" href="#pricing">Start monthly</a>
+        </div>
+        <div class="plan plan-pro">
+          <div class="plan-badge">2 months free</div>
+          <div class="plan-name">Annual</div>
+          <div class="plan-price"><span data-price="annual">$80</span> <small>/ year</small></div>
+          <ul><li>All features</li><li>2 computers</li><li>Works out to $6.67 a month</li></ul>
+          <a class="btn btn-ink" data-buy="annual" href="#pricing">Start annual</a>
+        </div>
+        <div class="plan">
+          <div class="plan-name">Lifetime</div>
+          <div class="plan-price"><span data-price="lifetime">$300</span> <small>once</small></div>
+          <ul><li>All features, forever</li><li>2 computers</li><li>Every future update</li></ul>
+          <a class="btn btn-line" data-buy="lifetime" href="#pricing">Buy lifetime</a>
+        </div>
+      </div>
+      <ol class="how">
+        <li><b>Pay</b> with card or local payment methods.</li>
+        <li><b>Get your key</b> by email right away.</li>
+        <li><b>Paste it</b> in RESUME: Settings → Plan &amp; license.</li>
+      </ol>
+      <p class="plan-note">Secure checkout by Dodo Payments. Prices in USD; taxes may apply.</p>
+    </div>
+  </section>
+
+  <section class="sec sec-alt" id="faq">
+    <div class="wrap narrow">
+      <h2>Questions</h2>
+      <details><summary>Does anything go to the cloud?</summary><p>No. Screenshots, window titles, your timeline and the AI summaries stay on your computer — the AI model runs locally. RESUME only goes online to download the model once (about 1.3 GB), to check your license key about once a day, and to check for updates.</p></details>
+      <details><summary>Is this employee monitoring?</summary><p>No. There are no accounts, no admin and no way to send your data to anyone else. RESUME only records when you press Start, shows a recording light the whole time, and lets you pause, exclude apps or delete anything.</p></details>
+      <details><summary>Does it record my keystrokes or microphone?</summary><p>Never. It notes which app and window are in front and takes screenshots at the interval you choose (10, 15 or 30 seconds). Idle detection only checks how long since you last touched the keyboard or mouse, not what you typed.</p></details>
+      <details><summary>Will it slow my computer down?</summary><p>RESUME is built for ordinary laptops with 8 GB of memory. Between screenshots it sleeps, identical screenshots are skipped, and screenshots are compressed. You set a storage limit and how long to keep them.</p></details>
+      <details><summary>What happens when the trial or subscription ends?</summary><p>You can still open, search and delete everything you recorded. To start new sessions, choose a plan. Subscriptions keep working offline for 14 days between checks.</p></details>
+      <details><summary>Can I move to a new computer?</summary><p>Yes. In RESUME, go to Settings → Plan &amp; license → Release this computer, then paste your key on the new one. Each key works on 2 computers at a time.</p></details>
+      <details><summary>Mac asks for Screen Recording permission.</summary><p>RESUME needs it to take screenshots and read window titles. Open System Settings → Privacy &amp; Security → Screen Recording, turn RESUME on, then reopen the app.</p></details>
+    </div>
+  </section>
+
+  <section class="sec" id="latest">
+    <div class="wrap">
+      <div class="latest">
+        <div>
+          <div class="eyebrow">Latest release</div>
+          <div class="latest-title" id="latestTitle">RESUME</div>
+          <div class="latest-date" id="latestDate"></div>
+        </div>
+        <ul class="latest-notes" id="latestNotes"><li>The first release is on its way.</li></ul>
+        <a class="btn btn-line" href="releases.html">Read the release log →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec-alt" id="contact">
+    <div class="wrap narrow">
+      <h2>Contact us</h2>
+      <p class="sec-lede">Questions, a lost key, or an idea for RESUME. We answer every message.</p>
+      <form class="contact" id="contactForm" novalidate>
+        <div class="row2">
+          <label for="cName">Your name<input id="cName" name="name" autocomplete="name" required></label>
+          <label for="cEmail">Your email<input id="cEmail" name="email" type="email" autocomplete="email" required></label>
+        </div>
+        <label for="cTopic">Topic
+          <select id="cTopic" name="topic">
+            <option>Question</option><option>License or purchase</option><option>Bug report</option><option>Feature idea</option>
+          </select>
+        </label>
+        <label for="cMsg">Message<textarea id="cMsg" name="message" rows="5" required></textarea></label>
+        <input type="text" name="_honey" class="honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="contact-foot">
+          <button class="btn btn-ink" type="submit" id="cSend">Send message</button>
+          <p class="cmsg" id="cStatus" role="status"></p>
+        </div>
+        <p class="cmail">Or email <span class="mail" id="mailText"></span> <button type="button" class="copy" id="copyMail">Copy</button></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-row">
+    <span>© <span id="year">2026</span> RESUME · Made by Mustaq</span>
+    <span class="foot-links"><a href="releases.html">Release log</a><a href="#pricing">Pricing</a><a href="#contact">Contact</a></span>
+    <span class="foot-small">Anonymous, cookie-free visit counts on this website. The app itself sends no analytics — ever.</span>
+  </div>
+</footer>
+
+<script src="config.js"></script>
+<script src="site.js"></script>
+<script src="demo.js"></script>
+</body>
+</html>
